@@ -110,8 +110,11 @@ directory = os.path.dirname(os.path.abspath(__file__)) + "\\Music"
 songs = os.listdir(directory)
 songList = []
 for i in songs:
-    i = i.replace('.mp3', '')
-    songList.append(i)
+    if '.mp3' in i:
+        i = i.replace('.mp3', '')
+        songList.append(i)
+    else:
+        continue
 for i in songList:
     b = tk.Button(
         root,
