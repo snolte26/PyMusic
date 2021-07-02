@@ -18,14 +18,16 @@ def musicTime(song):
     audio = MP3(song)
     songLength = round(audio.info.length)
     remaining = songLength
-    for i in range(songLength):
-        timeLeft = "Time Remaining: " + str(remaining) + " seconds"
-        songTime.delete('1.0', END)
-        songTime.insert(INSERT, timeLeft)
-        songTime.update()
-        time.sleep(1)
-        remaining -= 1
-    pass
+    for j in range(songLength):
+        if mixer.music.get_busy():
+            timeLeft = "Time Remaining: " + str(remaining) + " seconds"
+            songTime.delete('1.0', END)
+            songTime.insert(INSERT, timeLeft)
+            songTime.update()
+            time.sleep(1)
+            remaining -= 1
+        else:
+            continue
 
 def playMusic(name):
     directory = os.path.dirname(os.path.abspath(__file__)) + "\\Music\\" + name
